@@ -123,8 +123,10 @@ word "99" = "vauva"
 word _ = undefined 
 
 candidateWords :: String -> [String]
-candidateWords n = [[firstConsonant, vowel1, secondConsonant, vowel3] | firstConsonant <- [consonants !! 0], vowel1 <- "aeiou", secondConsonant <- [consonants !! 1], vowel3 <- "aeiou"] ++ [[firstConsonant, vowel1, vowel2, secondConsonant, vowel3] | firstConsonant <- [consonants !! 0], vowel1 <- "aeiou", vowel2 <- "aeiou", secondConsonant <- [consonants !! 1], vowel3 <- "aeiou"]
+candidateWords n = [[firstConsonant, vowel1, secondConsonant, vowel2] | vowel1 <- "aeiou", vowel2 <- "aeiou"] ++ [[firstConsonant, vowel1, vowel2, secondConsonant, vowel3] | vowel1 <- "aeiou", vowel2 <- "aeiou", vowel3 <- "aeiou"]
   where consonants = letters n
+        firstConsonant = head consonants
+        secondConsonant = head (tail consonants)
 
 letters :: [Char] -> [Char]
 letters digits = map convert digits
