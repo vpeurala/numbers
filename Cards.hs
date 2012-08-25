@@ -1,32 +1,40 @@
 import Control.Monad (mapM_)
 
+prefix :: String
+prefix = unlines [
+  "<!DOCTYPE html>",
+  "<html>",
+  "  <head>",
+  "    <title>Kortit</title>",
+  "    <meta charset='utf-8' />",
+  "    <style type='text/css'>",
+  "      body {",
+  "        font-family: 'Arial';",
+  "        font-size: 2em;",
+  "      }",
+  "      dt {",
+  "        float: left;",
+  "      }",
+  "      dd {",
+  "        padding-left: 3em;",
+  "        padding-bottom: 1em;",
+  "      }",
+  "    </style>",
+  "  </head>",
+  "  <body>",
+  "    <dl>" ]
+
+postfix :: String
+postfix = unlines [
+  "    </dl>",
+  "  </body>",
+  "</html>" ]
+
 main = do
-  putStrLn "<!DOCTYPE html>"
-  putStrLn "<html>"
-  putStrLn "  <head>"
-  putStrLn "    <title>Kortit</title>"
-  putStrLn "    <meta charset='utf-8' />"
-  putStrLn "    <style type='text/css'>"
-  putStrLn "      body {"
-  putStrLn "        font-family: 'Arial';"
-  putStrLn "        font-size: 2em;"
-  putStrLn "      }"
-  putStrLn "      dt {"
-  putStrLn "        float: left;"
-  putStrLn "      }"
-  putStrLn "      dd {"
-  putStrLn "        padding-left: 3em;"
-  putStrLn "        padding-bottom: 1em;"
-  putStrLn "      }" 
-  putStrLn "    </style>"
-  putStrLn "  </head>"
-  putStrLn "  <body>"
-  putStrLn "    <dl>"
+  putStr prefix
   let kortit = [Kortti maa arvo | maa <- [Pata, Hertta, Ruutu, Risti], arvo <- [1..13]]
   mapM_ (\k -> putStrLn $ "      <dt>" ++ show k ++ "</dt><dd>" ++ naama k ++ "</dd>") kortit
-  putStrLn "    </dl>"
-  putStrLn "  </body>"
-  putStrLn "</html>"
+  putStr postfix
 
 data Maa = Pata | Hertta | Ruutu | Risti
 
