@@ -1,40 +1,15 @@
 import Control.Monad (mapM_)
 
-prefix :: String
-prefix = unlines [
-  "<!DOCTYPE html>",
-  "<html>",
-  "  <head>",
-  "    <title>Kortit</title>",
-  "    <meta charset='utf-8' />",
-  "    <style type='text/css'>",
-  "      body {",
-  "        font-family: 'Arial';",
-  "        font-size: 2em;",
-  "      }",
-  "      dt {",
-  "        float: left;",
-  "      }",
-  "      dd {",
-  "        padding-left: 3em;",
-  "        padding-bottom: 1em;",
-  "      }",
-  "    </style>",
-  "  </head>",
-  "  <body>",
-  "    <dl>" ]
-
-postfix :: String
-postfix = unlines [
-  "    </dl>",
-  "  </body>",
-  "</html>" ]
-
 main = do
   putStr prefix
-  let kortit = [Kortti maa arvo | maa <- [Pata, Hertta, Ruutu, Risti], arvo <- [1..13]]
-  mapM_ (\k -> putStrLn $ "      <dt>" ++ show k ++ "</dt><dd>" ++ naama k ++ "</dd>") kortit
+  mapM_ (putStrLn . korttiToHtml) kortit
   putStr postfix
+
+korttiToHtml :: Kortti -> String
+korttiToHtml k = "      <dt>" ++ show k ++ "</dt><dd>" ++ naama k ++ "</dd>"
+
+kortit :: [Kortti]
+kortit = [Kortti maa arvo | maa <- [Pata, Hertta, Ruutu, Risti], arvo <- [1..13]]
 
 data Maa = Pata | Hertta | Ruutu | Risti
 
@@ -110,4 +85,34 @@ naama (Kortti Risti 12) = "Jyrki Laiho"
 naama (Kortti Risti 13) = "Jukka Purma"
 -- Tyhjä
 naama _                 = undefined
+
+prefix :: String
+prefix = unlines [
+  "<!DOCTYPE html>",
+  "<html>",
+  "  <head>",
+  "    <title>Kortit</title>",
+  "    <meta charset='utf-8' />",
+  "    <style type='text/css'>",
+  "      body {",
+  "        font-family: 'Arial';",
+  "        font-size: 2em;",
+  "      }",
+  "      dt {",
+  "        float: left;",
+  "      }",
+  "      dd {",
+  "        padding-left: 3em;",
+  "        padding-bottom: 1em;",
+  "      }",
+  "    </style>",
+  "  </head>",
+  "  <body>",
+  "    <dl>" ]
+
+postfix :: String
+postfix = unlines [
+  "    </dl>",
+  "  </body>",
+  "</html>" ]
 
