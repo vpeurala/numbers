@@ -27,7 +27,6 @@ main = do
   putStrLn "    </dl>"
   putStrLn "  </body>"
   putStrLn "</html>"
-  
 
 data Maa = Pata | Hertta | Ruutu | Risti
 
